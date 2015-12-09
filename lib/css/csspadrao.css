@@ -18,28 +18,31 @@ div.draggable {
         margin: 0 10px 10px 0; 
 }
 
-/* we leave some place on the side using the margin-* properties */
+div.containment-wrapper { 
+        width: 95%; 
+        height: 500px; 
+        border:2px solid #ccc; 
+        padding: 10px; 
+}
+
 #main {
-        position:relative;
+        position:absolute;
         padding-left:1em;
         padding-right:1em;
         left: 202px;
+        width: auto;
+        height: auto;
 }
-/* and then we put each list on its place */
+
 #list1 {
         left:0;
 }
 
-#accordion-resizer {
-    padding: 10px;
-    width: 250px;
-    height: 220px;
-    position: static;
-    top: 0;
-    left: 0;
+#container { 
+    height: auto;
+    position: absolute;
 }
 
-#container { width: 300px; height: 300px; }
 #container h3 { text-align: center; margin: 0; margin-bottom: 10px; }
-#resizable { background-position: top left; width: 150px; height: 150px; }
+#resizable, #container { background-position: top left; width: 150px; height: 150px; }
 #resizable, #container { padding: 0.5em; }

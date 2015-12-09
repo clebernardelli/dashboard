@@ -31,12 +31,10 @@ abstract class dsb_painelAbstract {
     }
     
     function renderPainel() {
-        $result = '<div id="container" class="ui-widget-content">';
-        $result = '  <h3 class="ui-widget-header">'. $this->getTitulo() . '</h3>';
+        $result = '<header class="ui-widget-header" style="font-size: 12px; padding: 4px;">'. $this->getTitulo() . '</header>';
         foreach ($this->dashboards as $dashBoard) {
             $result .= $dashBoard->render();
         }
-        $result .= '</div>';        
         return $result;
     }
     

@@ -147,7 +147,7 @@ abstract class dsb_dashBoardAbstract {
                 break;
             case dsb_dashBoardType::grBarras3D : return 'column3d';
                 break;
-            case dsb_dashBoardType::grGauge : return 'gauge';
+            case dsb_dashBoardType::grGauge : return 'angulargauge';
                 break;
             /* TODO */
             case dsb_dashBoardType::grNumericGroup : return '?';
@@ -171,7 +171,7 @@ abstract class dsb_dashBoardAbstract {
     {
         $scriptJS = '';
         if(!$this->getLocation()) {
-            $scriptJS .= '<div id="' . md5($this->getName()) . '" class="draggable ui-widget-content"></div>"';
+            $scriptJS .= '<div id="' . md5($this->getName()) . '" class="draggable"></div>';
             $renderAt = md5($this->getName());
         } else {
             $renderAt = $this->getLocation();
