@@ -1,0 +1,38 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "69e339dd385943e056421e1752d8ff4d",
+    "content-hash": "0527e807db20f96f17befbff53512a23",
+    "packages": [
+        {
+            "name": "phpclasses/fusion-charts-api",
+            "version": "2.10",
+            "dist": {
+                "type": "zip",
+                "url": "http://www.phpclasses.org/install/package/fusion-charts-api.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FusionCharts_": "library/"
+                }
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

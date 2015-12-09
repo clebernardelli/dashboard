@@ -1,0 +1,20 @@
+{
+  "require":
+  {
+    "phpclasses/fusion-charts-api": ">=2.10"
+  },
+  "autoload": {
+    "psr-0": {"": "src/"}
+  },  
+  "repositories":
+  [
+    {
+      "type": "composer",
+      "url": "http:\/\/www.phpclasses.org\/"
+    },
+    {
+      "packagist": false
+    }
+  ]
+  
+}

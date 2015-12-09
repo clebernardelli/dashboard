@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Draggable - Auto-scroll</title>
+
+  <script type="text/javascript" src="lib/js/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="lib/js/js_funcao.js"></script>
+  <script type="text/javascript" src="lib/js/jquery-ui.min.js"></script>
+  <link href="lib/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+
+  <style>
+        div.draggable  { width: 510px; height: 310px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
+        #container { width: 300px; height: 300px; }
+  </style>
+  <script>
+  $(function() {
+    $( "div.draggable").draggable({ scroll: true, scrollSensitivity: 100 });  
+    //$( "#draggable" ).draggable({ scroll: true });
+    //$( "#draggable2" ).draggable({ scroll: true, scrollSensitivity: 100 });
+    //$( "#draggable3" ).draggable({ scroll: true, scrollSpeed: 100 });
+  });
+  </script>
+</head>
+<body>
+
+<div id="container" class="draggable ui-widget-content">
+</div> 
+
+<div id="teste" class="draggable ui-widget-content">
+  <button id="button">teste</button>
+</div>
+ 
+<div id="test2" class="draggable ui-widget-content">
+  <p>scrollSensitivity set to 100</p>
+</div>
+ 
+<div id="test3" class="draggable ui-widget-content">
+  <p>scrollSpeed set to 100</p>
+</div>
+ 
+ 
+ 
+</body>
+</html>

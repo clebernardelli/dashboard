@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboards</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="lib/js/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="lib/js/js_funcao.js"></script>
+        <script type="text/javascript" src="lib/js/jquery-ui.min.js"></script>
+
+        <link href="lib/css/csspadrao.css" rel="stylesheet" type="text/css">
+        <link href="lib/fusioncharts/assets/css/style.css" rel="stylesheet" type="text/css">
+        <!--[if IE]>
+           <script src="assets/scripts/html5shiv.js"></script>
+        <![endif]-->
+        <link href="lib/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+
+        <script type="text/javascript" src="lib/js/js_janela.js"></script>
+    </head>
+    <body>
+        <div id="menu-lateral" class="menu ui-widget-content">
+            <div id="accordion">
+                <h3>Atendimento</h3>
+                <div>
+                    <a href="#" onclick="ajaxSendData('showpainel=ate_atendimentos')" title="Atendimentos realiados por mês">Atendimentos<br></a>
+                    <a href="#" onclick="ajaxSendData('showpainel=ate_atendimentos')" title="Atendimentos em tempo real">Atendimentos Tempo Real<br></a>
+                </div>
+                <h3>Fábrica</h3>
+                <div>Phasellus mattis tincidunt nibh.</div>
+                <h3>Migração</h3>
+                <div>Nam dui erat, auctor a, dignissim quis.</div>
+            </div>
+        </div>
+        <div id="main"> </div>
+    </body>
+</html>
+
+
+

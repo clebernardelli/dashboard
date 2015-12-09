@@ -1,0 +1,45 @@
+/* 
+    Created on : 04/12/2015, 22:17:18
+    Author     : Administrador
+*/
+div.menu {
+        top:0;
+        font-size:14;
+        left: 0px; 
+        position: fixed;
+        width: 200px
+}
+
+div.draggable { 
+        width: 510px; 
+        height: 310px; 
+        padding: 0.5em; 
+        float: left; 
+        margin: 0 10px 10px 0; 
+}
+
+/* we leave some place on the side using the margin-* properties */
+#main {
+        position:relative;
+        padding-left:1em;
+        padding-right:1em;
+        left: 202px;
+}
+/* and then we put each list on its place */
+#list1 {
+        left:0;
+}
+
+#accordion-resizer {
+    padding: 10px;
+    width: 250px;
+    height: 220px;
+    position: static;
+    top: 0;
+    left: 0;
+}
+
+#container { width: 300px; height: 300px; }
+#container h3 { text-align: center; margin: 0; margin-bottom: 10px; }
+#resizable { background-position: top left; width: 150px; height: 150px; }
+#resizable, #container { padding: 0.5em; }
