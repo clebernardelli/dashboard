@@ -14,6 +14,7 @@ class ate_atendimentos extends dsb_painelAbstract {
     
     function dashboardAtendimentosMes() {
        $dashBoard = new dsb_dashboardBarras();
+       $dashBoard->setName("AtendimentosMes");
        $dashBoard->setTitulo("Atendimentos por Tipo");
        $dashBoard->setNomeEixoX("Tipo");
        $dashBoard->setNomeEixoY("Atendimentos");
@@ -22,9 +23,10 @@ class ate_atendimentos extends dsb_painelAbstract {
        $this->addDashboard($dashBoard);
        return $dashBoard;
     }
-    
+
     function dashboardAtendimentosMes3D() {
        $dashBoard = new dsb_dashboardBarras();
+       $dashBoard->setName("AtendimentosMes3D");
        $dashBoard->set3D();
        $dashBoard->setTitulo("Atendimentos por Tipo 3D");
        $dashBoard->setNomeEixoX("Tipo");

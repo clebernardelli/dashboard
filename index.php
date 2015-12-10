@@ -9,7 +9,8 @@
                 //Atualizar um dashboard específico
                 $method = 'dashboard' . $_POST['iddashboard'];
                 if(method_exists($painel, $method)) {
-                    $painel->$method();
+                    $dashboard = $painel->$method();
+                    echo $dashboard->getJSONSourceFormat();
                 } else {
                     throw new dsb_class_exception_base('Método ' . $method . ' não existe na classe ' . $_POST['showpainel']);            
                 }                

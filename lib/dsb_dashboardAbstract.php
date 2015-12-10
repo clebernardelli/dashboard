@@ -94,11 +94,17 @@ abstract class dsb_dashBoardAbstract {
         $this->tipoGrafico = $tipoGrafico;
     }
     
-    function getLargura() {
+    function getLargura($addPx = 0) {
+        if($addPx > 0) {
+            return $this->largura + $addPx;
+        }
         return $this->largura;
     }
 
-    function getAltura() {
+    function getAltura($addPx = 0) {
+        if($addPx > 0) {
+            return $this->altura + $addPx;
+        }
         return $this->altura;
     }
 
@@ -169,14 +175,15 @@ abstract class dsb_dashBoardAbstract {
     
     public function render()
     {
-        $scriptJS = '';
+        $scriptJS = '<div id="area_dash_'.md5($this->getName()).'" class="draggable" style="width: ' .  $this->getLargura(20) . 'px; height: ' . $this->getAltura(38) . 'px;">'
+                  . '  <button onclick="ajaxSendData(\'showpainel=ate_atendimentos&iddashboard='. $this->getName(). '\',\'' . md5($this->getName()) . '\')">Atualizar</button>';
         if(!$this->getLocation()) {
-            $scriptJS .= '<div id="' . md5($this->getName()) . '" class="draggable"></div>';
+            $scriptJS .= '<div id="' . md5($this->getName()) . '" style="display: inline-block;"></div>';
             $renderAt = md5($this->getName());
         } else {
             $renderAt = $this->getLocation();
         }
-        $scriptJS .= $this->getIncludesToJs();
+        $scriptJS .= '</div>' . $this->getIncludesToJs();
         
         $scriptJS .= "<script type='text/javascript'>";
         $scriptJS .= 'FusionCharts.ready(function(){
