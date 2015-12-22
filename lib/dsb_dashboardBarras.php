@@ -10,8 +10,8 @@ class dsb_dashboardBarras extends dsb_dashBoardAbstract {
     private $nomeEixoX;
     private $nomeEixoY;
     
-    function __construct() {      
-        parent::__construct();
+    function __construct($owner) {      
+        parent::__construct($owner);
         $this->setTipoGrafico(dsb_dashBoardType::grBarras2D);
     }
     

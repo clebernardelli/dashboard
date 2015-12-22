@@ -16,8 +16,8 @@ class dsb_dashboardGauge extends dsb_dashBoardAbstract {
     
     private $quadrantes = Array();
     
-    function __construct() {      
-        parent::__construct();
+    function __construct($owner) {      
+        parent::__construct($owner);
         $this->setTipoGrafico(dsb_dashBoardType::grGauge);
 
         /* Setar os valores iniciais padrão */

@@ -23,6 +23,9 @@ abstract class dsb_dashBoardAbstract {
     /* Dados para o gráfico no formato JSON */
     private $data;
     
+    /* @type $parent dsb_painelAbstract */
+    private $parent;
+    
     private $name;
     /* @type dashBoardType */
     private $tipoGrafico;
@@ -32,15 +35,23 @@ abstract class dsb_dashBoardAbstract {
     private $altura;
     private $location;
     
+    private $interval;
+    
     /* @var dsb_query */
     private $queryOfData;
     
-    function __construct() {
+    function __construct($owner) {
+       $this->parent = $owner;
        $this->setAltura(300);
        $this->setLargura(500);
+       $this->setInterval(0);
        $this->setTipoGrafico(dsb_dashBoardType::grBarras2D);
     }
     
+    function getParent() {
+        return $this->parent;
+    }
+
     function getName() {
         return $this->name;
     }
@@ -121,6 +132,15 @@ abstract class dsb_dashBoardAbstract {
     function setQueryOfData($queryOfData) {
         $this->queryOfData = $queryOfData;
     }
+    
+    //O interval será sempre em segundos, tem que converter para milisec.
+    function getInterval() {
+        return $this->interval * 1000;
+    }
+
+    function setInterval($interval) {
+        $this->interval = $interval;
+    }
 
     private function getFCType() {
         switch ($this->getTipoGrafico()) {
@@ -143,38 +163,58 @@ abstract class dsb_dashBoardAbstract {
     public function render()
     {
         $scriptJS = '<div id="area_dash_'.md5($this->getName()).'" class="draggable" style="width: ' .  $this->getLargura(20) . 'px; height: ' . $this->getAltura(38) . 'px;">'
-                  . '  <button onclick="ajaxSendData(\'showpainel=ate_atendimentos&iddashboard='. $this->getName(). '\',\'' . md5($this->getName()) . '\')">Atualizar</button>';
+                  . '  <button onclick="ajaxSendData(\'showpainel=' . $this->getParent()->getId() . '&iddashboard='. $this->getName(). '\',\'' . md5($this->getName()) . '\')">Atualizar</button>';
         if(!$this->getLocation()) {
             $scriptJS .= '<div id="' . md5($this->getName()) . '" style="display: inline-block;"></div>';
             $renderAt = md5($this->getName());
         } else {
             $renderAt = $this->getLocation();
         }
+        if ($this->getInterval() != 0) {
+            $intervalJS = 'var interval = setInterval(callRefreshDashboard_' . $renderAt . ', ' . $this->getInterval() . ');';
+        } else {
+            $intervalJS = '';
+        }
         $scriptJS .= "<script type='text/javascript'>";
-        $scriptJS .= 'var chart = new FusionCharts({"type": "'. $this->getFCType() .'",
+        $scriptJS .= 'var chart = new FusionCharts({"id": "dashboard_' . $renderAt . '",
+                                                    "type": "'. $this->getFCType() .'",
                                                     "width": "'. $this->getLargura(). '",
                                                     "height": "' . $this->getAltura(). '",  
                                                     "dataFormat": "json",
                                                     "dataSource":  {'. 
-                                                                       $this->getJSONSourceFormat(). ','. 
-                                                                       $this->getJSONData(). '
+                                                                      $this->getJSONSourceFormat(). ','. 
+                                                                      $this->getJSONData(). '
                                                                    }
                      });
                      chart.render("' . $renderAt . '");
                      
+                     //Timer para atualizar o dashboard.
+                     ' . $intervalJS . ' 
+                     
+                     //Função para fazer o update do dashboard
                      function updateDashboard_' . $renderAt . '(JSONData)
                      {
                          try {
-                             var chartReference = FusionCharts("'. $renderAt . '");
-                             chartReference.setXMLUrl(JSONData);
+                             var chartReference = FusionCharts("dashboard_'. $renderAt . '");
+                             chartReference.setJSONData(JSONData);
+                             chartReference.render();
                          } catch (ex) {
-                             alert("Falha ao carregar gráfico ' . $renderAt . '");
+                             alert("Falha ao carregar dashboard dashboard_' . $renderAt . '. JSON Data: " + JSONData);
                          }   
-                     }';        
+                     }
+                     
+                     function callRefreshDashboard_' . $renderAt . '(){
+                         ajaxSendData(\'showpainel=' . $this->getParent()->getId() . '&iddashboard='. $this->getName(). '\',\'' . md5($this->getName()) . '\')
+                     }   
+                     ';        
         $scriptJS .= "</script>";
         $scriptJS .= "</div>";
         
         return $scriptJS;
+    }
+    
+    public function refresh() {
+        return '{' . $this->getJSONData() . ','. $this->getJSONSourceFormat(). '}';
     }
         
     abstract function getJSONSourceFormat();

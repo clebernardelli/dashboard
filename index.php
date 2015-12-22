@@ -10,7 +10,7 @@
                 $method = 'dashboard' . $_POST['iddashboard'];
                 if(method_exists($painel, $method)) {
                     $dashboard = $painel->$method();
-                    echo $dashboard->getJSONSourceFormat();
+                    echo $dashboard->refresh();
                 } else {
                     throw new dsb_class_exception_base('Método ' . $method . ' não existe na classe ' . $_POST['showpainel']);            
                 }                

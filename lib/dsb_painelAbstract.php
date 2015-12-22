@@ -10,6 +10,7 @@ abstract class dsb_painelAbstract {
     private $dashboards = Array();
     /* @var $conn dsb_connection_bd */
     private $conn;
+    private $id;
     private $titulo;
     
     function __construct() {
@@ -53,6 +54,14 @@ abstract class dsb_painelAbstract {
 
     function setTitulo($titulo) {
         $this->titulo = $titulo;
+    }
+    
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
     }
     
 }
