@@ -13,8 +13,6 @@ class dsb_dashboardBarras extends dsb_dashBoardAbstract {
     function __construct() {      
         parent::__construct();
         $this->setTipoGrafico(dsb_dashBoardType::grBarras2D);
-        /* Adicionar o js necessário para o tipo do dashboard */
-        $this->addInclude('lib/fusioncharts/js/fusioncharts.charts.js');
     }
     
     public function set2D() {

@@ -19,8 +19,6 @@ class dsb_dashboardGauge extends dsb_dashBoardAbstract {
     function __construct() {      
         parent::__construct();
         $this->setTipoGrafico(dsb_dashBoardType::grGauge);
-        /* Adicionar o js necessário para o tipo do dashboard */
-        $this->addInclude('lib/fusioncharts/js/fusioncharts.charts.js');
 
         /* Setar os valores iniciais padrão */
         $this->setLimiteInferior(0);

@@ -20,9 +20,6 @@ abstract class dsb_dashBoardType {
 
 abstract class dsb_dashBoardAbstract {
     
-    private $pathJS;
-    private $includes = Array();
-    
     /* Dados para o gráfico no formato JSON */
     private $data;
     
@@ -41,17 +38,7 @@ abstract class dsb_dashBoardAbstract {
     function __construct() {
        $this->setAltura(300);
        $this->setLargura(500);
-       $this->setPathJS('lib/fusioncharts/js/fusioncharts.charts.js');
        $this->setTipoGrafico(dsb_dashBoardType::grBarras2D);
-       
-       $this->addInclude('lib/fusioncharts/js/fusioncharts.js');
-       
-       /* $scriptJS .= '<script type="text/javascript" src="lib/fusioncharts/js/fusioncharts.charts.js"></script>';
-        $scriptJS .= '<script type="text/javascript" src="lib/fusioncharts/js/fusioncharts.powercharts.js"></script>';
-        $scriptJS .= '<script type="text/javascript" src="lib/fusioncharts/js/fusioncharts.gantt.js"></script>';
-        $scriptJS .= '<script type="text/javascript" src="lib/fusioncharts/js/fusioncharts.maps.js"></script>';
-        $scriptJS .= '<script type="text/javascript" src="lib/fusioncharts/js/fusioncharts.widgets.js"></script>';
-       */
     }
     
     function getName() {
@@ -70,14 +57,6 @@ abstract class dsb_dashBoardAbstract {
         $this->location = $location;
     }
 
-    function getPathJS() {
-        return $this->pathJS;
-    }
-
-    function setPathJS($pathJS) {
-        $this->pathJS = $pathJS;
-    }
-    
     function getData() {
         return $this->data;
     }
@@ -135,10 +114,6 @@ abstract class dsb_dashBoardAbstract {
         $this->subTitulo = $subTitulo;
     }
 
-    function addInclude($include) {
-        array_push($this->includes, $include);
-    }
-    
     function getQueryOfData() {
         return $this->queryOfData;
     }
@@ -165,14 +140,6 @@ abstract class dsb_dashBoardAbstract {
         }
     }
 
-    private function getIncludesToJs(){
-        $result = '';
-        foreach ($this->includes as $include) {
-            $result .= '<script type="text/javascript" src="'.$include.'"></script>';
-        }
-        return $result;
-    }
-    
     public function render()
     {
         $scriptJS = '<div id="area_dash_'.md5($this->getName()).'" class="draggable" style="width: ' .  $this->getLargura(20) . 'px; height: ' . $this->getAltura(38) . 'px;">'
@@ -183,25 +150,29 @@ abstract class dsb_dashBoardAbstract {
         } else {
             $renderAt = $this->getLocation();
         }
-        $scriptJS .= '</div>' . $this->getIncludesToJs();
-        
         $scriptJS .= "<script type='text/javascript'>";
-        $scriptJS .= 'FusionCharts.ready(function(){
-                       
-                       var chart = new FusionCharts({"type": "'. $this->getFCType() .'",
-                        "renderAt": "'. $renderAt . '",
-                        "width": "'. $this->getLargura(). '",
-                        "height": "' . $this->getAltura(). '",
-                        "dataFormat": "json",
-                        "dataSource":  {'. 
-                               $this->getJSONSourceFormat(). ','. 
-                               $this->getJSONData(). '
-                        }
-                    })
-                   chart.render();
-                });';        
-        
+        $scriptJS .= 'var chart = new FusionCharts({"type": "'. $this->getFCType() .'",
+                                                    "width": "'. $this->getLargura(). '",
+                                                    "height": "' . $this->getAltura(). '",  
+                                                    "dataFormat": "json",
+                                                    "dataSource":  {'. 
+                                                                       $this->getJSONSourceFormat(). ','. 
+                                                                       $this->getJSONData(). '
+                                                                   }
+                     });
+                     chart.render("' . $renderAt . '");
+                     
+                     function updateDashboard_' . $renderAt . '(JSONData)
+                     {
+                         try {
+                             var chartReference = FusionCharts("'. $renderAt . '");
+                             chartReference.setXMLUrl(JSONData);
+                         } catch (ex) {
+                             alert("Falha ao carregar gráfico ' . $renderAt . '");
+                         }   
+                     }';        
         $scriptJS .= "</script>";
+        $scriptJS .= "</div>";
         
         return $scriptJS;
     }
