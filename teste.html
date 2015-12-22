@@ -1,45 +1,64 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>jQuery UI Draggable - Auto-scroll</title>
+<!DOCTYPE HTML> 
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        .splitter {
+            overflow:hidden;
+            clear:both;
+        }
+        .splitter_v {
+            background-color: #757C82;
+            width: 6px;
+            height: 100%;
+            background: -moz-linear-gradient(0deg, #CCCCCC,#757C82);
+            background: -webkit-gradient(linear, right bottom,left bottom, to(#CCCCCC), from(#757C82));
+            background: -o-gradient(linear, right bottom,left bottom, to(#CCCCCC), from(#757C82));
+        }
+        .splitter_area {
+            background-image: url('../../imagem/temas/padrao/imagem_temas_padrao_splitter.gif');
+            background-repeat:no-repeat;
+            cursor:pointer;
+        }
 
-  <script type="text/javascript" src="lib/js/jquery-2.1.3.js"></script>
-  <script type="text/javascript" src="lib/js/js_funcao.js"></script>
-  <script type="text/javascript" src="lib/js/jquery-ui.min.js"></script>
-  <link href="lib/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+        .splitter_area_h {
+            height:5px;
+            width:117px;
+            position:relative;
+            left:50%;
+            margin-left:-58px;
 
-  <style>
-        div.draggable  { width: 510px; height: 310px; padding: 0.5em; float: left; margin: 0 10px 10px 0; }
-        #container { width: 300px; height: 300px; }
-  </style>
-  <script>
-  $(function() {
-    $( "div.draggable").draggable({ scroll: true, scrollSensitivity: 100 });  
-    //$( "#draggable" ).draggable({ scroll: true });
-    //$( "#draggable2" ).draggable({ scroll: true, scrollSensitivity: 100 });
-    //$( "#draggable3" ).draggable({ scroll: true, scrollSpeed: 100 });
-  });
-  </script>
-</head>
-<body>
+        }
+        .splitter_area_v {
+            height:117px;
+            width:5px;
+            top:50%;
+            position: relative;
+            margin-top:-59px;
+        }
 
-<div id="container" class="draggable ui-widget-content">
-</div> 
+        .splitter_top {
+            background-position:center 0px;
+        }
+        .splitter_bottom {
+            background-position:center -112px;
+        }
+        .splitter_left {
+            background-position:left 0px;
+        }
+        .splitter_right {
+            background-position:right 0px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="splitter splitter_h">
+      <div class="splitter_area splitter_area_v splitter_left"> 1  </div>
+      <div class="teste"> 2  </div>
+    </div>
 
-<div id="teste" class="draggable ui-widget-content">
-  <button id="button">teste</button>
-</div>
- 
-<div id="test2" class="draggable ui-widget-content">
-  <p>scrollSensitivity set to 100</p>
-</div>
- 
-<div id="test3" class="draggable ui-widget-content">
-  <p>scrollSpeed set to 100</p>
-</div>
- 
- 
- 
-</body>
+    <script type="text/javascript">
+    </script>
+
+  </body>
 </html>
